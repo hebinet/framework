@@ -678,7 +678,7 @@ class DatabaseQueryBuilderTest extends TestCase
         $period = now()->toPeriod(now()->addDay());
         $builder->select('*')->from('users')->whereBetween('created_at', $period);
         $this->assertSame('select * from "users" where "created_at" between ? and ?', $builder->toSql());
-        $this->assertEquals([$period->start, $period->end], $builder->getBindings());
+        $this->assertEquals([$period->getStartDate(), $period->getEndDate()], $builder->getBindings());
     }
 
     public function testWhereBetweenColumns()
